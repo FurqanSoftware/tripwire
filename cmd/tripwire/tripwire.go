@@ -10,7 +10,8 @@ import (
 )
 
 func main() {
-	types := flag.String("types", "", "")
+	types := flag.String("type", "", "")
+	output := flag.String("output", "tripwire.go", "")
 	flag.Parse()
 
 	args := flag.Args()
@@ -40,7 +41,7 @@ func main() {
 		log.Fatalf("generating code: %s", err)
 	}
 
-	err = ioutil.WriteFile(filepath.Join(g.pkg.dir, "tripwire.go"), src, 0644)
+	err = ioutil.WriteFile(filepath.Join(g.pkg.dir, *output), src, 0644)
 	if err != nil {
 		log.Fatalf("writing output: %s", err)
 	}
